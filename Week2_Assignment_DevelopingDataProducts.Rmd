@@ -1,0 +1,76 @@
+---
+title: "Some Colleges in India"
+author: "Ishaan Agarwal"
+date: "10/08/2022"
+output: html_document
+---
+
+```{r, echo=FALSE}
+# Colleges / universities in India
+library(leaflet)
+# 01) Indian Institute of Technology Bombay
+# 02) Indian Institute of Technology Kanpur
+# 03) Indian Institute of Science (IISC) Bangalore
+# 04) Manipal Institute of Technology
+# 05) Vellore Institute of Technology
+
+univSites <- c(
+  "<a href='https://www.iitb.ac.in/'> Indian Institute of Technology Bombay</a>",
+  "<a href='https://manipal.edu/mit.html'>Manipal Institute of Technology</a>",
+  "<a href='https://www.iitk.ac.in/'>Indian Institute of Technology Kanpur</a>",
+  "<a href='https://iisc.ac.in/'>Indian Institute of Science (IISC) Bangalore</a>",
+  "<a href='https://vit.ac.in/'>Vellore Institute of Technology</a>"
+  )
+univLatLon <- data.frame(
+  lat = c(19.1334, 13.3525, 12.9915, 13.0219, 12.9692),
+  lng = c(72.9133, 74.7928, 80.2337, 77.5671, 79.1559)
+)
+IITBIcon <- makeIcon(
+  iconUrl='https://www.iitb.ac.in/sites/www.iitb.ac.in/themes/touchm/logo.png',
+  iconWidth=31 * 215 / 230,
+  iconHeight=31,
+  iconAnchorX=31 * 215 / 230 / 2,
+  iconAnchorY=16
+)
+MITIcon <- makeIcon(
+  iconUrl='https://images.shiksha.com/mediadata/images/1602828916phpIjgYq2.jpeg',
+  iconWidth=31 * 215 / 230,
+  iconHeight=31,
+  iconAnchorX=31 * 215 / 230 / 2,
+  iconAnchorY=16
+)
+IITMIcon <- makeIcon(
+  iconUrl='https://upload.wikimedia.org/wikipedia/en/thumb/6/69/IIT_Madras_Logo.svg/1200px-IIT_Madras_Logo.svg.png',
+  iconWidth=31 * 215 / 230,
+  iconHeight=31,
+  iconAnchorX=31 * 215 / 230 / 2,
+  iconAnchorY=16
+)
+IISCIcon <- makeIcon(
+  iconUrl='https://iisc.ac.in/wp-content/uploads/2020/08/IISc_Master_Seal_Reverse.jpg',
+  iconWidth=31 * 215 / 230,
+  iconHeight=31,
+  iconAnchorX=31 * 215 / 230 / 2,
+  iconAnchorY=16
+)
+VITIcon <- makeIcon(
+  iconUrl='https://upload.wikimedia.org/wikipedia/en/thumb/c/c5/Vellore_Institute_of_Technology_seal_2017.svg/1200px-Vellore_Institute_of_Technology_seal_2017.svg.png',
+  iconWidth=31 * 215 / 230,
+  iconHeight=31,
+  iconAnchorX=31 * 215 / 230 / 2,
+  iconAnchorY=16
+)
+
+univIcons <- iconList(
+  IITBIcon,
+  MITIcon,
+  IITMIcon,
+  IISCIcon,
+  VITIcon
+)
+univLatLon %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(icon=univIcons, popup=univSites)
+```
+
